@@ -1,3 +1,7 @@
+/**
+ * @option js.extractors
+ */
+
 load('../js/assert.js');
 
 {

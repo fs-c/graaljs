@@ -2490,10 +2490,10 @@ public class Parser extends AbstractParser {
                 throw error(AbstractParser.message(MSG_INVALID_LVALUE), binding.getToken());
             }
 
-            final boolean isExtracting = binding instanceof CallNode;
-            assert !isExtracting || ESNEXT_EXTRACTORS;
+//            final boolean isExtracting = binding instanceof CallNode;
+//            assert !isExtracting || ESNEXT_EXTRACTORS;
 
-            final boolean isDestructuring = !(binding instanceof IdentNode) && !isExtracting;
+            final boolean isDestructuring = !(binding instanceof IdentNode);
             if (isDestructuring) {
                 final int finalVarFlags = varFlags | VarNode.IS_DESTRUCTURING;
                 verifyDestructuringBindingPattern(binding, new Consumer<IdentNode>() {
@@ -2541,7 +2541,7 @@ public class Parser extends AbstractParser {
                 // else, if we are in a for loop, delay checking until we know the kind of loop
             }
 
-            if (!isDestructuring && !isExtracting) {
+            if (!isDestructuring) {
                 assert init != null || varType != CONST || !isStatement;
                 final IdentNode ident = (IdentNode) binding;
                 if (varType != VAR && ident.getName().equals(LET.getName())) {
